@@ -4,7 +4,7 @@ import { Send } from 'lucide-react';
 
 interface ReviewFormProps {
   movieId: number;
-  onReviewSubmit: () => void; // Функция для обновления списка после отправки
+  onReviewSubmit: () => void;
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ movieId, onReviewSubmit }) => {

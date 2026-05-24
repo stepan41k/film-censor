@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieCard from '../components/MovieCard';
-import { Movie } from '../types';
-
-const TMDB_KEY = 'YOUR_TMDB_API_KEY'; // ПОЛУЧИ НА themoviedb.org
+import type { Movie } from '../types';
 
 const HomePage: React.FC = () => {
     const [loading, setLoading] = useState(true);
@@ -12,10 +10,8 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_KEY}&language=ru-RU`
-        );
-        setMovies(response.data.results);
+          const response = await axios.get(`http://localhost:8000/movies/popular`);
+          setMovies(response.data.results);
       } catch (error) {
         console.error("Ошибка при загрузке фильмов", error);
       } finally {
