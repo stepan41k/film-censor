@@ -1,11 +1,15 @@
 export interface Movie {
   id: number;
-  title: string;
-  poster_path: string;
-  vote_average: number;
-  release_date: string;
-  overview: string;
-  tagline?: string;
+  name: string;
+  description?: string;
+  year: number;
+  poster: {
+    url: string;
+    previewUrl?: string;
+  };
+  rating: {
+    kp: number;
+  };
 }
 
 export interface Review {
@@ -14,5 +18,4 @@ export interface Review {
   username: string;
   rating: number;
   comment: string;
-  createdAt?: string;
 }
