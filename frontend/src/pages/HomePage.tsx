@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
     const fetchMovies = async () => {
       try {
           const response = await axios.get(`http://localhost:8000/movies/popular`);
-          setMovies(response.data.results);
+          setMovies(response.data.docs);
       } catch (error) {
         console.error("Ошибка при загрузке фильмов", error);
       } finally {
@@ -26,17 +26,18 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8 text-gray-100">Популярные фильмы</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {movies.map((movie: Movie) => ( // Заменяем any на Movie
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 justify-items-center">
+        {movies.map((movie: Movie) => (
+          <div key={movie.id} className="w-full max-w-[220px]">
             <MovieCard 
-              key={movie.id}
               id={movie.id}
-              title={movie.title}
-              posterPath={movie.poster_path}
-              rating={movie.vote_average}
-              releaseDate={movie.release_date}
+              title={movie.name}
+              posterPath={movie.poster.url}
+              rating={movie.rating.kp}
+              year={movie.year}
             />
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );
