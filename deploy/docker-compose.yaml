@@ -22,13 +22,10 @@ services:
     backend:
         build: ../backend
         container_name: movie_backend
-        dns:
-            - 8.8.8.8
-            - 8.8.4.4
         restart: always
         environment:
             - DATABASE_URL=postgresql://user:password@db:5432/movie_reviews
-            - TMDB_API_KEY=bad7873e5fd0a11f0bfd9c0e6a888c33
+            - TMDB_API_KEY=17SF45M-ANE49MZ-PPZNCQQ-ARJF5RY
         depends_on:
             db:
                 condition: service_healthy
