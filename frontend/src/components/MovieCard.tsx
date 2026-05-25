@@ -1,33 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star } from 'lucide-react';
+import { Star, Calendar } from 'lucide-react';
 
 interface MovieCardProps {
   id: number;
-  title: string;
+  title: string;    
   posterPath: string;
-  rating: number;
-  releaseDate: string;
+  rating: number;     
+  year: number;    
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ id, title, posterPath, rating, releaseDate }) => {
-  const imageUrl = `https://image.tmdb.org/t/p/w500${posterPath}`;
-
+const MovieCard: React.FC<MovieCardProps> = ({ id, title, posterPath, rating, year }) => {
   return (
-    <Link to={`/movie/${id}`} className="group">
-      <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-200 group-hover:scale-105">
-        <img 
-          src={posterPath ? imageUrl : 'https://via.placeholder.com/500x750?text=No+Poster'} 
-          alt={title} 
-          className="w-full h-96 object-cover"
-        />
-        <div className="p-4">
-          <h3 className="text-white font-bold text-lg truncate">{title}</h3>
-          <div className="flex justify-between items-center mt-2">
-            <span className="text-gray-400 text-sm">{releaseDate.split('-')[0]}</span>
-            <div className="flex items-center text-yellow-400">
-              <Star size={16} fill="currentColor" />
-              <span className="ml-1 text-sm font-semibold">{rating.toFixed(1)}</span>
+      <Link to={`/movie/${id}`} className="block w-full"> {/* Карточка занимает 100% от колонки сетки */}
+            <div className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800">
+              <div className="relative aspect-2/3">
+                <img 
+                  src={posterPath} 
+                  className="w-full h-full object-cover"
+                />
+          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 border border-white/10">
+            <Star size={14} className="text-yellow-400 fill-yellow-400" />
+            <span className="text-white text-sm font-bold">
+              {rating > 0 ? rating.toFixed(1) : '—'}
+            </span>
+          </div>
+        </div>
+
+        <div className="p-4 flex flex-col grow">
+          <h3 className="text-white font-bold text-base leading-tight mb-2 group-hover:text-blue-400 transition-colors line-clamp-2">
+            {title}
+          </h3>
+          
+          <div className="mt-auto flex items-center justify-between text-gray-400 text-sm">
+            <div className="flex items-center gap-1">
+              <Calendar size={14} />
+              <span>{year}</span>
             </div>
           </div>
         </div>
