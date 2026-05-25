@@ -29,7 +29,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ movieId, onReviewSubmit }) => {
       setUsername('');
       setComment('');
       setRating(10);
-      onReviewSubmit(); // Вызываем колбэк для обновления списка
+      onReviewSubmit();
     } catch (error) {
       console.error('Ошибка при отправке отзыва:', error);
       alert('Не удалось отправить отзыв');
